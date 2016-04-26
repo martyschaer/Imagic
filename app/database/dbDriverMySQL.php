@@ -1,4 +1,7 @@
 <?php
+
+require_once "app/utils/constants.php";
+
 class dbDriverMySQL
 {
     private static $conn;
@@ -6,9 +9,7 @@ class dbDriverMySQL
     private static $isInstantiated = false;
 
     public static function create(){
-        $user = "imagic";
-        $pass = "ZfvXN2JnHeP56F73";
-        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', $user, $pass);
+        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', constants::DB_USER, constants::DB_PASS);
         self::$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         if(self::testConn()){
             self::$isInstantiated = true;
