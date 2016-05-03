@@ -1,6 +1,6 @@
 <?php
 
-require_once "app/utils/constants.php";
+require_once "app/utilities/ConstantsUtility.php";
 
 class dbDriverMySQL
 {
