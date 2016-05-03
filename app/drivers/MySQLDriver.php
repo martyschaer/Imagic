@@ -1,15 +1,15 @@
 <?php
+namespace Drivers;
+use \Utilities\ConstantsUtility;
+use \PDO;
 
-require_once "app/utilities/ConstantsUtility.php";
-
-class dbDriverMySQL
+class MySQLDriver
 {
     private static $conn;
-    private static $ROOT_PATH = "../../";
     private static $isInstantiated = false;
 
     public static function create(){
-        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', constants::DB_USER, constants::DB_PASS);
+        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', ConstantsUtility::DB_USER, ConstantsUtility::DB_PASS);
         self::$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         if(self::testConn()){
             self::$isInstantiated = true;

@@ -1,4 +1,10 @@
 <?php
-    require_once "app/drivers/MySQLDriver.php";
+    require_once "App/Utilities/AutoloaderUtility.php";
+    use \Utilities\AutoloaderUtility;
+    use \Drivers\MySQLDriver;
 
-    print_r(dbDriverMySQL::query("SELECT * FROM `test`", []));
+    $autoloader = new AutoloaderUtility();
+    $autoloader->setIncludePath("/web/www/imagic/App");
+    $autoloader->register();
+
+    print_r(MySQLDriver::query("SELECT * FROM `test`", []));
