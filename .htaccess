@@ -1,0 +1,7 @@
+#.htaccess by Severin Kaderli
+#https://github.com/severinkaderli/gibb/blob/master/Lehrjahr_3/Modul_133/Projektauftrag2_Blog/.htaccess
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L]
