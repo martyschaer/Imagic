@@ -1,5 +1,6 @@
 <?php
 namespace Utilities;
+
 class ConstantsUtility
 {
     const DB_USER = 'imagic';
