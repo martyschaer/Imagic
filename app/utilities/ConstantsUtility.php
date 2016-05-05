@@ -1,6 +1,11 @@
 <?php
 namespace Utilities;
 
+/**
+ * class to save some often used constants.
+ * Class ConstantsUtility
+ * @package Utilities
+ */
 class ConstantsUtility
 {
     const DB_USER = 'imagic';
