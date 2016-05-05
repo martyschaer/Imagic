@@ -24,8 +24,8 @@ $router->map('GET', '/', function () {
     Renderer::view('home');
 });
 
-$router->map('GET', '/test/[a:parm]', function ($parm) {
-    echo $parm;
+$router->map('GET', '/test/[a:teststring]', function ($params) {
+    Renderer::view('test', $params);
 });
 
 $router->map('GET', '/about', function () {
@@ -36,7 +36,7 @@ $router->map('GET', '/about', function () {
 $match = $router->match();
 
 if ($match && is_callable($match['target'])) {
-    call_user_func_array($match['target'], $match['params']);
+    call_user_func($match['target'], $match['params']);
 } else {
     Renderer::view('404', ['uri' => $_SERVER['REQUEST_URI']]);
 }
