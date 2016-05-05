@@ -17,13 +17,14 @@ class MySQLDriver
      * it's implicitly called when a query is executed
      * @return bool
      */
-    public static function create(){
+    public static function create()
+    {
         self::$conn = new PDO('mysql:host=localhost;dbname=imagic', ConstantsUtility::DB_USER, ConstantsUtility::DB_PASS);
-        self::$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        if(self::testConn()){
+        self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if (self::testConn()) {
             self::$isInstantiated = true;
             return true;
-        }else{
+        } else {
             self::destroy();
             return false;
         }
@@ -36,23 +37,24 @@ class MySQLDriver
      * @param $query
      * @param $params
      */
-    public static function query($query, $params){
-        if(!self::$isInstantiated) {
+    public static function query($query, $params)
+    {
+        if (!self::$isInstantiated) {
             self::create();
         }
-        try{
+        try {
             $statement = self::$conn->prepare($query);
-            foreach($params as $col => $value){
+            foreach ($params as $col => $value) {
                 $statement->bindValue($col, $value);
             }
             $statement->execute();
             $statement->setFetchMode(PDO::FETCH_ASSOC);
             $result = array();
-            while($row = $statement->fetch()){
+            while ($row = $statement->fetch()) {
                 $result[] = $row;
             }
             return $result;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log($e->getMessage());
         }
         return [];
@@ -65,10 +67,11 @@ class MySQLDriver
      * if not, the connection is destroyed and an exception is thrown.
      * @return bool
      */
-    private static function testConn(){
+    private static function testConn()
+    {
         $statement = self::$conn->query('SELECT * FROM test');
         $row = $statement->fetch(PDO::FETCH_ASSOC);
-        if($row['test'] == 'ok'){
+        if ($row['test'] == 'ok') {
             return true;
         }
         return false;
@@ -77,7 +80,8 @@ class MySQLDriver
     /**
      * destroys the connection.
      */
-    public static function destroy(){
+    public static function destroy()
+    {
         self::$isInstantiated = false;
         self::$conn = null;
     }

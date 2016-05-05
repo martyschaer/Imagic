@@ -1,36 +1,42 @@
 <?php
-    require_once "App/Utilities/AutoloaderUtility.php";
+require_once "App/Utilities/AutoloaderUtility.php";
 
-    use \Utilities\AutoloaderUtility;
-    use \Utilities\RouterUtility;
-    use \Drivers\MySQLDriver;
+use \Utilities\AutoloaderUtility;
+use \Utilities\RouterUtility;
+use \Drivers\MySQLDriver;
+use \Views\Renderer;
 
-    $autoloader = new AutoloaderUtility();
-    $autoloader->setIncludePath("/web/www/imagic/App");
-    $autoloader->register();
+//bootstrapping the autoloader
+$autoloader = new AutoloaderUtility();
+$autoloader->setIncludePath("/web/www/imagic/App");
+$autoloader->register();
 
-    $router = new RouterUtility();
-    $router->map('GET', '/test', function(){
-        print_r(MySQLDriver::query("SELECT * FROM `test`", []));
-    });
+//instantiating the router
+$router = new RouterUtility();
 
-    $router->map('GET', '/', function(){
-        echo "Hello World";
-    });
+//TODO put registering routes into a seperate file
+//registering routes
+$router->map('GET', '/test', function () {
+    print_r(MySQLDriver::query("SELECT * FROM `test`", []));
+});
 
-    $router->map('GET', '/test/[a:parm]', function($parm){
-        echo $parm;
-    });
+$router->map('GET', '/', function () {
+    Renderer::view('home');
+});
 
-    $match = $router->match();
+$router->map('GET', '/test/[a:parm]', function ($parm) {
+    echo $parm;
+});
 
-    if($match && is_callable($match['target'])){
-        call_user_func_array($match['target'], $match['params']);
-    }else{
-        //no route could be matched
-        header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
-        ?>
-        <h1>404</h1>
-        <h4>the page you requested could not be found on our server</h4>
-        <?php
-    }
+$router->map('GET', '/about', function () {
+    Renderer::view('about');
+});
+
+
+$match = $router->match();
+
+if ($match && is_callable($match['target'])) {
+    call_user_func_array($match['target'], $match['params']);
+} else {
+    Renderer::view('404', ['uri' => $_SERVER['REQUEST_URI']]);
+}
