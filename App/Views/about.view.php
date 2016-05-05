@@ -1,9 +1,9 @@
+<html>
 <?php
 use \Views\Renderer;
 
+Renderer::view('head')
 ?>
-<html>
-<?php Renderer::view('head') ?>
 <body>
 <h1>imagic</h1>
 <h2>about</h2>
