@@ -49,6 +49,7 @@ class Renderer
     private function extendParams($params)
     {
         $params['ROOT_PATH'] = "../../";
+        $params['RESOURCE_PATH'] = $params['ROOT_PATH'] . '/Resources';
         $params['HEAD'] = self::prep('head', $params);
         return $params;
     }
