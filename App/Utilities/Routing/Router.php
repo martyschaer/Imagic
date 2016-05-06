@@ -1,10 +1,10 @@
 <?php
-namespace Utilities;
+namespace Utilities\Routing;
 
 use \Exception;
 use \Traversable;
 
-class RouterUtility
+class Router
 {
     private $routes = [];
     private $names = [];

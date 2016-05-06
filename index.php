@@ -1,42 +1,35 @@
 <?php
-require_once "App/Utilities/AutoloaderUtility.php";
+require_once "App/Utilities/Autoloader.php";
 
-use \Utilities\AutoloaderUtility;
-use \Utilities\RouterUtility;
-use \Drivers\MySQLDriver;
-use \Views\Renderer;
+use \Utilities\Autoloader;
+use \Utilities\Routing\Router;
+use \Utilities\Routing\Routes;
+use \Utilities\Constants;
 
 //bootstrapping the autoloader
-$autoloader = new AutoloaderUtility();
+$autoloader = new Autoloader();
 $autoloader->setIncludePath("/web/www/imagic/App");
 $autoloader->register();
 
+
+ini_set('session.cookie_lifetime', Constants::TIME_WEEK);
+session_start();
+$_SESSION['session_id'] = session_id();
+if(!isset($_SESSION['user'])){
+    session_regenerate_id(true);
+}
+
 //instantiating the router
-$router = new RouterUtility();
+$router = new Router();
 
-//TODO put registering routes into a seperate file
-//registering routes
-$router->map('GET', '/test', function () {
-    print_r(MySQLDriver::query("SELECT * FROM `test`", []));
-});
+//see the Routes file for all the routes
+$router->addRoutes(Routes::all());
 
-$router->map('GET', '/', function () {
-    Renderer::view('home');
-});
-
-$router->map('GET', '/test/[a:parm]', function ($parm) {
-    echo $parm;
-});
-
-$router->map('GET', '/about', function () {
-    Renderer::view('about');
-});
-
-
+//see if the called url matches any routes
 $match = $router->match();
 
 if ($match && is_callable($match['target'])) {
-    call_user_func_array($match['target'], $match['params']);
+    call_user_func($match['target'], $match['params']);
 } else {
     Renderer::view('404', ['uri' => $_SERVER['REQUEST_URI']]);
 }
