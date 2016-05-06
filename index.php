@@ -4,11 +4,20 @@ require_once "App/Utilities/Autoloader.php";
 use \Utilities\Autoloader;
 use \Utilities\Routing\Router;
 use \Utilities\Routing\Routes;
+use \Utilities\Constants;
 
 //bootstrapping the autoloader
 $autoloader = new Autoloader();
 $autoloader->setIncludePath("/web/www/imagic/App");
 $autoloader->register();
+
+
+ini_set('session.cookie_lifetime', Constants::TIME_WEEK);
+session_start();
+$_SESSION['session_id'] = session_id();
+if(!isset($_SESSION['user'])){
+    session_regenerate_id(true);
+}
 
 //instantiating the router
 $router = new Router();
