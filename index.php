@@ -1,18 +1,19 @@
 <?php
-require_once "App/Utilities/AutoloaderUtility.php";
+require_once "App/Utilities/Autoloader.php";
 
-use \Utilities\AutoloaderUtility;
-use \Utilities\RouterUtility;
+use \Utilities\Autoloader;
+use \Utilities\Router;
 use \Drivers\MySQLDriver;
 use \Views\Renderer;
+use \Controllers\UserController;
 
 //bootstrapping the autoloader
-$autoloader = new AutoloaderUtility();
+$autoloader = new Autoloader();
 $autoloader->setIncludePath("/web/www/imagic/App");
 $autoloader->register();
 
 //instantiating the router
-$router = new RouterUtility();
+$router = new Router();
 
 //TODO put registering routes into a seperate file
 //registering routes
@@ -24,12 +25,25 @@ $router->map('GET', '/', function () {
     Renderer::view('home');
 });
 
-$router->map('GET', '/test/[a:teststring]', function ($params) {
-    Renderer::view('test', $params);
-});
 
 $router->map('GET', '/about', function () {
     Renderer::view('about');
+});
+
+$router->map('GET', '/login', function(){
+    Renderer::view('login');
+});
+
+$router->map('GET', '/register', function(){
+    Renderer::view('register');
+});
+
+$router->map('POST', '/user/new', function(){
+    UserController::create();
+});
+
+$router->map('GET', '/profile', function(){
+    Renderer::view('profile');
 });
 
 

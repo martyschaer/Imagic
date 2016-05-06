@@ -1,7 +1,7 @@
 <?php
 namespace Utilities;
 
-class AlphanumericIdUtility
+class AlphaNumericHelper
 {
     /**
      * Translates a number to a short alhanumeric version
