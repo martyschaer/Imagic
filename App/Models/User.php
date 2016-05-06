@@ -51,7 +51,7 @@ class User
 
     public function getById($id = null)
     {
-        $query = "SELECT * FROM users WHERE `id` = `:id`";
+        $query = "SELECT * FROM users WHERE `id` = :id";
         $params = ['id' => $id];
         $result = MySQLDriver::query($query, $params);
         if (count($result) != 1) {
@@ -72,7 +72,7 @@ class User
 
     public function getByEmail($email, $pass)
     {
-        $result = MySQLDriver::query('SELECT * FROM users WHERE `email` = `:email`', [':email' => $email]);
+        $result = MySQLDriver::query('SELECT * FROM users WHERE `email` = :email', [':email' => $email]);
         if (count($result) != 1) {
             throw new Exception('Could not log in. No Email/Password match.');
         }
