@@ -24,12 +24,17 @@ $router->map('GET', '/', function () {
     Renderer::view('home');
 });
 
-$router->map('GET', '/test/[a:teststring]', function ($params) {
-    Renderer::view('test', $params);
-});
 
 $router->map('GET', '/about', function () {
     Renderer::view('about');
+});
+
+$router->map('GET', '/login', function(){
+    Renderer::view('login');
+});
+
+$router->map('GET', '/register', function(){
+    Renderer::view('register');
 });
 
 
