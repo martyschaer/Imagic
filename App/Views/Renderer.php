@@ -48,6 +48,7 @@ class Renderer
 
     private function extendParams($params)
     {
+        $params['SESSION'] = print_r($_SESSION, true);
         $params['ROOT_PATH'] = "../../";
         $params['RESOURCE_PATH'] = $params['ROOT_PATH'] . '/Resources';
         $params['HEAD'] = self::prep('head', $params);

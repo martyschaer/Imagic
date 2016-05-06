@@ -2,6 +2,8 @@
 {{HEAD}}
 <body>
 <h1>login</h1>
-
+<pre>
+    {{SESSION}}
+</pre>
 </body>
 </html>

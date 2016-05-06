@@ -17,5 +17,8 @@
         <li>private pictures & galleries</li>
     </ul>
 </span>
+<pre>
+    {{SESSION}}
+</pre>
 </body>
 </html>
