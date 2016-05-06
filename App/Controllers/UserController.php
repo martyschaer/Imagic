@@ -34,4 +34,17 @@ class UserController
         echo print_r(get_defined_vars(), true);
         die();
     }
+
+    public static function login(){
+        $email = 'schaer.marius@gmail.com';
+        $pass = 'supersecurex';
+        $user = new User();
+        $user->getByEmail($email, $pass);
+        $_SESSION['user'] = $user;
+    }
+
+    public static function logout(){
+        $_SESSION = null;
+        session_destroy();
+    }
 }

@@ -9,9 +9,6 @@ class Routes
 {
     public static function all(){
         return [
-            ['GET', '/test', function () {
-                print_r(MySQLDriver::query("SELECT * FROM `test`", []));
-            }],
             ['GET', '/', function () {
                 Renderer::view('home');
             }],
@@ -19,10 +16,15 @@ class Routes
                 Renderer::view('about');
             }],
             ['GET', '/login', function(){
+                UserController::login();
                 Renderer::view('login');
             }],
             ['GET', '/register', function(){
                 Renderer::view('register');
+            }],
+            ['GET', '/logout', function(){
+                UserController::logout();
+                header('Location: /');
             }],
             ['POST', '/user/new', function(){
                 UserController::create();
