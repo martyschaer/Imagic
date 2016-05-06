@@ -55,7 +55,11 @@ class MySQLDriver
             }
             return $result;
         } catch (PDOException $e) {
+            error_log("===PDO_ERROR=============");
             error_log($e->getMessage());
+            error_log($query);
+            error_log(print_r($params, true));
+            error_log("===END_ERROR=============");
         }
         return [];
     }
