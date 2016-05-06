@@ -1,18 +1,18 @@
 <?php
-require_once "App/Utilities/AutoloaderUtility.php";
+require_once "App/Utilities/Autoloader.php";
 
-use \Utilities\AutoloaderUtility;
-use \Utilities\RouterUtility;
+use \Utilities\Autoloader;
+use \Utilities\Router;
 use \Drivers\MySQLDriver;
 use \Views\Renderer;
 
 //bootstrapping the autoloader
-$autoloader = new AutoloaderUtility();
+$autoloader = new Autoloader();
 $autoloader->setIncludePath("/web/www/imagic/App");
 $autoloader->register();
 
 //instantiating the router
-$router = new RouterUtility();
+$router = new Router();
 
 //TODO put registering routes into a seperate file
 //registering routes

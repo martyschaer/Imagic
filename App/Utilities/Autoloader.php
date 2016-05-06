@@ -37,7 +37,7 @@
  * @author Fabien Potencier <fabien.potencier@symfony-project.org>
  */
 namespace Utilities;
-class AutoloaderUtility
+class Autoloader
 {
     private $_fileExtension = '.php';
     private $_namespace;

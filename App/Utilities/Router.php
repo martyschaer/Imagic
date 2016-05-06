@@ -4,7 +4,7 @@ namespace Utilities;
 use \Exception;
 use \Traversable;
 
-class RouterUtility
+class Router
 {
     private $routes = [];
     private $names = [];

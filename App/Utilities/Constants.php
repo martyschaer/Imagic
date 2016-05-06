@@ -6,7 +6,7 @@ namespace Utilities;
  * Class ConstantsUtility
  * @package Utilities
  */
-class ConstantsUtility
+class Constants
 {
     const DB_USER = 'imagic';
     const DB_PASS = 'ZfvXN2JnHeP56F73';

@@ -1,7 +1,7 @@
 <?php
 namespace Drivers;
 
-use \Utilities\ConstantsUtility;
+use \Utilities\Constants;
 use \PDO;
 use \PDOException;
 
@@ -19,7 +19,7 @@ class MySQLDriver
      */
     public static function create()
     {
-        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', ConstantsUtility::DB_USER, ConstantsUtility::DB_PASS);
+        self::$conn = new PDO('mysql:host=localhost;dbname=imagic', Constants::DB_USER, Constants::DB_PASS);
         self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         if (self::testConn()) {
             self::$isInstantiated = true;
