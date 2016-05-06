@@ -33,7 +33,7 @@
                         method: 'POST',
                         success: function(response){
                             if(response == 'ok'){
-                                window.location.href = '/profile'
+                                window.location.href = '/login'
                             }else{
                                 console.log(response);
                             }

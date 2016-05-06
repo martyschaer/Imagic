@@ -6,15 +6,16 @@ use \Models\Factories\UserFactory;
 
 class UserController
 {
-    public static function create(){
-        if(!(isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['pass_repeat']))){
+    public static function create()
+    {
+        if (!(isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['pass_repeat']))) {
             echo "Not all required fields are filled out.";
             die();
         }
         $email = $_POST['email'];
         $pass = $_POST['pass'];
         $pass_repeat = $_POST['pass_repeat'];
-        if($pass !== $pass_repeat){
+        if ($pass !== $pass_repeat) {
             echo "The entered passwords don't match.";
             die();
         }
@@ -27,7 +28,7 @@ class UserController
             ->signup_time(time())
             ->make();
 
-        if($user instanceof User){
+        if ($user instanceof User) {
             echo "ok";
             die();
         }
@@ -35,15 +36,29 @@ class UserController
         die();
     }
 
-    public static function login(){
-        $email = 'schaer.marius@gmail.com';
-        $pass = 'supersecurex';
+    public static function login()
+    {
+        if (!(isset($_POST['email']) && $_POST['pass'])) {
+            echo "Not all required fields are filled out.";
+            die();
+        }
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
         $user = new User();
-        $user->getByEmail($email, $pass);
+        try {
+            $user->getByEmail($email, $pass);
+        } catch (\Exception $e) {
+            echo "Error: " . $e->getMessage();
+            die();
+        }
         $_SESSION['user'] = $user;
+        echo "ok";
+        die();
     }
 
-    public static function logout(){
+    public
+    static function logout()
+    {
         $_SESSION = null;
         session_destroy();
     }

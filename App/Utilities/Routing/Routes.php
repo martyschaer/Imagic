@@ -15,19 +15,21 @@ class Routes
             ['GET', '/about', function () {
                 Renderer::view('about');
             }],
-            ['GET', '/login', function(){
+            ['POST', '/user/login', function(){
                 UserController::login();
+            }],
+            ['GET', '/login', function(){
                 Renderer::view('login');
             }],
             ['GET', '/register', function(){
                 Renderer::view('register');
             }],
-            ['GET', '/logout', function(){
-                UserController::logout();
-                header('Location: /');
-            }],
             ['POST', '/user/new', function(){
                 UserController::create();
+            }],
+            ['GET', '/user/logout', function(){
+                UserController::logout();
+                header('Location: /');
             }],
             ['GET', '/profile', function(){
                 Renderer::view('profile');
