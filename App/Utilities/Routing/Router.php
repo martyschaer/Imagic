@@ -1,5 +1,5 @@
 <?php
-namespace Utilities;
+namespace Utilities\Routing;
 
 use \Exception;
 use \Traversable;
