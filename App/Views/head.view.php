@@ -1,9 +1,4 @@
 <head>
-    <style type="text/css">
-        html, body {
-            font-family: Sans-Serif;
-            color: #000000;
-        }
-    </style>
+    <link href="{{ROOT_PATH}}/Resources/css/main.css" rel="stylesheet">
     <title>imagic</title>
 </head>

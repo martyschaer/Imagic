@@ -15,14 +15,20 @@ class Renderer
      */
     public static function view($view, $params = [])
     {
+        $params = self::extendParams($params);
+        $content = self::prep($view, $params);
+        echo $content;
+
+    }
+
+    private static function prep($view, $params)
+    {
         $path = __DIR__ . DIRECTORY_SEPARATOR . $view . ".view.php";
-        if (file_exists($path)) {
-            $raw = file_get_contents($path);
-            $content = self::fillTemplate($raw, $params);
-            echo $content;
-        } else {
+        if (!file_exists($path)) {
             throw new Exception("Could not find '{$path}'. File does not exist.");
         }
+        $raw = file_get_contents($path);
+        return self::fillTemplate($raw, $params);
     }
 
     /**
@@ -38,5 +44,12 @@ class Renderer
             $processed = str_replace('{{' . $key . '}}', (string)$value, $processed);
         }
         return (string)$processed;
+    }
+
+    private function extendParams($params)
+    {
+        $params['ROOT_PATH'] = "../../";
+        $params['HEAD'] = self::prep('head', $params);
+        return $params;
     }
 }

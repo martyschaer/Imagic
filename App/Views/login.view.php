@@ -1,9 +1,5 @@
 <html>
-<?php
-use \Views\Renderer;
-
-Renderer::view('head')
-?>
+{{HEAD}}
 <body>
 <h1>login</h1>
 
