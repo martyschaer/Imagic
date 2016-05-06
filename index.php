@@ -5,6 +5,7 @@ use \Utilities\Autoloader;
 use \Utilities\Router;
 use \Drivers\MySQLDriver;
 use \Views\Renderer;
+use \Controllers\UserController;
 
 //bootstrapping the autoloader
 $autoloader = new Autoloader();
@@ -35,6 +36,14 @@ $router->map('GET', '/login', function(){
 
 $router->map('GET', '/register', function(){
     Renderer::view('register');
+});
+
+$router->map('POST', '/user/new', function(){
+    UserController::create();
+});
+
+$router->map('GET', '/profile', function(){
+    Renderer::view('profile');
 });
 
 
