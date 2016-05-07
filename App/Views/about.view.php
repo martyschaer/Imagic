@@ -1,7 +1,7 @@
 <html>
 {{HEAD}}
 <body>
-<h1>imagic</h1>
+{{HEADER}}
 <h2>about</h2>
 <span>
     written by Marius Schär (<a href="https://github.com/martyschaer">@martyschaer</a> ) as a school project.

@@ -1,7 +1,8 @@
 <html>
 {{HEAD}}
 <body>
-<h1>login</h1>
+{{HEADER}}
+<h2>login</h2>
 <span>
     <form id="login_form">
         <input name="email" type="email" placeholder="email-address" required>
@@ -29,8 +30,5 @@
         });
     </script>
 </span>
-<pre>
-    {{SESSION}}
-</pre>
 </body>
 </html>

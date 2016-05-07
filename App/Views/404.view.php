@@ -1,7 +1,8 @@
 <html>
 {{HEAD}}
 <body>
-<h1>404</h1>
-<h4>sorry! we could not find {{uri}}</h4>
+{{HEADER}}
+<h2>404</h2>
+<span>sorry! we could not find {{uri}}</span>
 </body>
 </html>
