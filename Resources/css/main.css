@@ -2,4 +2,49 @@
 html, body {
     font-family: 'Open Sans', sans-serif;
     color: #000000;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+header{
+    background-color: #585858;
+    height: 100px;
+    padding: 0 30px;
+}
+
+header *{
+    display: inline-block;
+}
+
+header img#logo{
+    height: 100%;
+}
+
+header ul{
+    float: right;
+}
+
+li.user_email{
+    color: #DEDEDE;
+    margin: 5px;
+}
+
+a.light{
+    background-color: #DEDEDE;
+    color: #343434;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+a.dark{
+    background-color: #343434;
+    color: #DEDEDE;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 4px;
 }
