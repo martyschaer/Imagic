@@ -93,7 +93,7 @@ class UserFactory extends User
             ':uri' => $this->user->uri,
             ':pass' => $this->user->pass,
             ':reset_hash' => $this->user->reset_hash,
-            ':reset_time' => $this->user->signup_time,
+            ':reset_time' => $this->user->reset_time,
             ':signup_time' => $this->user->signup_time,
             ':profile_image' => $this->user->profile_image,
             ':permission_level' => $this->user->permission_level

@@ -4,6 +4,7 @@ namespace Drivers;
 use \Utilities\Constants;
 use \PDO;
 use \PDOException;
+use \Utilities\Validator;
 
 class MySQLDriver
 {
@@ -50,8 +51,10 @@ class MySQLDriver
             $statement->execute();
             $statement->setFetchMode(PDO::FETCH_ASSOC);
             $result = array();
-            while ($row = $statement->fetch()) {
-                $result[] = $row;
+            if(!(Validator::insert_query($query) || Validator::update_query($query))){
+                while ($row = $statement->fetch()) {
+                    $result[] = $row;
+                }
             }
             return $result;
         } catch (PDOException $e) {
