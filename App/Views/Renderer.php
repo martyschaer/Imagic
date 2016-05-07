@@ -21,6 +21,13 @@ class Renderer
 
     }
 
+    /**
+     * preps the view for displaying.
+     * @param $view
+     * @param $params
+     * @return string
+     * @throws Exception
+     */
     private static function prep($view, $params)
     {
         $path = __DIR__ . DIRECTORY_SEPARATOR . $view . ".view.php";
@@ -46,12 +53,23 @@ class Renderer
         return (string)$processed;
     }
 
+    /**
+     * extends the $params array by some commonly used values
+     * @param $params
+     * @return mixed
+     * @throws Exception
+     */
     private function extendParams($params)
     {
+        if(isset($_SESSION['user'])){
+            $params['USER_EMAIL'] = $_SESSION['user']->getEmail();
+        }
+
         $params['SESSION'] = print_r($_SESSION, true);
         $params['ROOT_PATH'] = "../../";
         $params['RESOURCE_PATH'] = $params['ROOT_PATH'] . '/Resources';
         $params['HEAD'] = self::prep('head', $params);
+        $params['HEADER'] = self::prep((isset($_SESSION['user']) ? 'in.header' : 'out.header'), $params);
         return $params;
     }
 }

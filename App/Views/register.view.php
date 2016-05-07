@@ -1,7 +1,8 @@
 <html>
 {{HEAD}}
 <body>
-<h1>register</h1>
+{{HEADER}}
+<h2>register</h2>
 <span>
     <form id="register_form">
         <input name="email" type="email" placeholder="email-address" required>
@@ -35,7 +36,7 @@
                             if(response == 'ok'){
                                 window.location.href = '/login'
                             }else{
-                                console.log(response);
+                                alert(response);
                             }
                         }
                     });
