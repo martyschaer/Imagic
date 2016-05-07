@@ -36,4 +36,16 @@ class Validator
 
         return in_array($level, $valid, true);
     }
+
+    public static function update_query($query){
+        return self::str_starts_with($query, 'UPDATE');
+    }
+
+    public static function insert_query($query){
+        return self::str_starts_with($query, 'INSERT');
+    }
+
+    private static function str_starts_with($string, $query){
+        return mb_substr($string, 0, mb_strlen($query)) === $query;
+    }
 }
