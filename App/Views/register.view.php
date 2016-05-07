@@ -35,7 +35,7 @@
                             if(response == 'ok'){
                                 window.location.href = '/login'
                             }else{
-                                console.log(response);
+                                alert(response);
                             }
                         }
                     });

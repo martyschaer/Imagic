@@ -21,7 +21,7 @@
                         if(response == 'ok'){
                             window.location.href = '/profile'
                         }else{
-                            console.log(response);
+                            alert(response);
                         }
                     }
                 });
