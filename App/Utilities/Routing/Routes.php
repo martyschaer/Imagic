@@ -1,7 +1,6 @@
 <?php
 namespace Utilities\Routing;
 
-use \Drivers\MySQLDriver;
 use \Views\Renderer;
 use \Controllers\UserController;
 

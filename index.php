@@ -5,6 +5,7 @@ use \Utilities\Autoloader;
 use \Utilities\Routing\Router;
 use \Utilities\Routing\Routes;
 use \Utilities\Constants;
+use \Views\Renderer;
 
 //bootstrapping the autoloader
 $autoloader = new Autoloader();
