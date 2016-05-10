@@ -5,3 +5,4 @@
         <li><a class="light" href="/login">login</a></li>
     </ul>
 </header>
+{{NAV}}

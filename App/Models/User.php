@@ -95,6 +95,30 @@ class User
         }
     }
 
+    public function getByUri($uri, $pass = null){
+        if($pass = null){
+            return $this->getPublicData($uri);
+        }else{
+            return $this->getPublicData($uri);
+        }
+    }
+
+    private function getPublicData($uri){
+        $query = "SELECT
+                    `uri`, `signup_time`, `profile_image`, `permission_level`$
+                  FROM users WHERE `uri` = :uri";
+        $params = [':uri' => $uri];
+        $result = MySQLDriver::query($query, $params);
+        if (count($result) != 1) {
+            throw new Exception('Could not get this user. Wrong ID or ID does not exist.');
+        }
+        return $result[0];
+    }
+
+    private function getPrivateData($uri){
+
+    }
+
     public function getEmail()
     {
         return $this->email;

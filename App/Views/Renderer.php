@@ -61,15 +61,20 @@ class Renderer
      */
     private function extendParams($params)
     {
+        $is_logged_in = false;
         if(isset($_SESSION['user'])){
+            $is_logged_in = true;
             $params['USER_EMAIL'] = $_SESSION['user']->getEmail();
         }
+
+        $params['REDIRECT_IF_NOT_LOGGED_IN'] = (!$is_logged_in ? "<script>window.location.replace('/login');</script>" : "<!--that did not work-->");
 
         $params['SESSION'] = print_r($_SESSION, true);
         $params['ROOT_PATH'] = "../../";
         $params['RESOURCE_PATH'] = $params['ROOT_PATH'] . '/Resources';
         $params['HEAD'] = self::prep('head', $params);
-        $params['HEADER'] = self::prep((isset($_SESSION['user']) ? 'in.header' : 'out.header'), $params);
+        $params['NAV'] = self::prep('menu', $params);
+        $params['HEADER'] = self::prep(($is_logged_in ? 'in.header' : 'out.header'), $params);
         return $params;
     }
 }

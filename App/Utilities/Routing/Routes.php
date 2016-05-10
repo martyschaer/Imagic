@@ -28,10 +28,13 @@ class Routes
             }],
             ['GET', '/user/logout', function(){
                 UserController::logout();
-                header('Location: /');
             }],
-            ['GET', '/profile', function(){
+            ['GET', '/user/', function(){
+                UserController::show(null);
                 Renderer::view('profile');
+            }],
+            ['GET', '/user/[a:uri]', function($uri){
+                UserController::show($uri);
             }]
         ];
     }

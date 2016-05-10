@@ -56,10 +56,16 @@ class UserController
         die();
     }
 
-    public
+    public static function show($uri){
+        $user = new User();
+        print_r($user->getByUri($uri));
+    }
+
+
     static function logout()
     {
         $_SESSION = null;
         session_destroy();
+        header('Location: /');
     }
 }

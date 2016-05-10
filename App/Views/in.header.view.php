@@ -5,3 +5,4 @@
         <li><a class="light" href="/user/logout">logout</a></li>
     </ul>
 </header>
+{{NAV}}
