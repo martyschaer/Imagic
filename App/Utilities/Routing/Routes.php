@@ -29,12 +29,13 @@ class Routes
             ['GET', '/user/logout', function(){
                 UserController::logout();
             }],
-            ['GET', '/user/', function(){
-                UserController::show(null);
-                Renderer::view('profile');
+            ['GET', '/user', function(){
+                $data = UserController::show(null);
+                Renderer::view('profile_private', $data);
             }],
-            ['GET', '/user/[a:uri]', function($uri){
-                UserController::show($uri);
+            ['GET', '/user/[a:uri]', function($params){
+                $data = UserController::show($params['uri']);
+                Renderer::view('profile_public', $data);
             }]
         ];
     }

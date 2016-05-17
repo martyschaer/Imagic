@@ -21,4 +21,6 @@ class Constants
     const TIME_HOUR = self::TIME_MINUTE * 60;
     const TIME_DAY = self::TIME_HOUR * 24;
     const TIME_WEEK = self::TIME_DAY * 7;
+
+    const PERMISSIONS = [0 => 'user', 1 => 'moderator', 9 => 'admin'];
 }

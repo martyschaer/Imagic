@@ -95,9 +95,9 @@ class User
         }
     }
 
-    public function getByUri($uri, $pass = null){
-        if($pass = null){
-            return $this->getPublicData($uri);
+    public function getByUri($uri){
+        if(isset($_SESSION['user']) && $_SESSION['user']->getUri() == $uri){
+            return $this->getPrivateData($uri);
         }else{
             return $this->getPublicData($uri);
         }
@@ -105,23 +105,35 @@ class User
 
     private function getPublicData($uri){
         $query = "SELECT
-                    `uri`, `signup_time`, `profile_image`, `permission_level`$
+                    `uri`, `signup_time`, `profile_image`, `permission_level`
                   FROM users WHERE `uri` = :uri";
         $params = [':uri' => $uri];
         $result = MySQLDriver::query($query, $params);
         if (count($result) != 1) {
-            throw new Exception('Could not get this user. Wrong ID or ID does not exist.');
+            throw new Exception('Could not get this user. Wrong URI or URI does not exist.' . print_r($uri, true));
         }
         return $result[0];
     }
 
     private function getPrivateData($uri){
-
+        $query = "SELECT
+                    `uri`, `signup_time`, `profile_image`, `permission_level`
+                  FROM users WHERE `uri` = :uri";
+        $params = [':uri' => $uri];
+        $result = MySQLDriver::query($query, $params);
+        if (count($result) != 1) {
+            throw new Exception('Could not get this user. Wrong URI or URI does not exist.' . $uri . "@@    ");
+        }
+        return $result[0];
     }
 
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getUri(){
+        return $this->uri;
     }
 
     public function setEmail($email)

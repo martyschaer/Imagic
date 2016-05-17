@@ -57,8 +57,10 @@ class UserController
     }
 
     public static function show($uri){
+        $uri = ($uri == null ? $_SESSION['user']->getUri() : $uri);
         $user = new User();
         print_r($user->getByUri($uri));
+        return ['uri' => $user->getUri()];
     }
 
 
