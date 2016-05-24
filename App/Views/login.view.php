@@ -2,12 +2,14 @@
 {{HEAD}}
 <body>
 {{HEADER}}
-<h2>login</h2>
 <span>
     <form id="login_form">
-        <input name="email" type="email" placeholder="email-address" required>
-        <input name="pass" type="password" placeholder="password" required>
-        <input type="submit" value="login">
+        <h2>login</h2>
+        <input id="email" name="email" type="email" placeholder="email-address" required>
+        <br>
+        <input id="pass" name="pass" type="password" placeholder="password" required>
+        <br>
+        <input id="pass_rep" type="submit" value="login">
     </form>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -20,7 +22,7 @@
                     method: 'POST',
                     success: function(response){
                         if(response == 'ok'){
-                            window.location.href = '/profile'
+                            window.location.href = '/user'
                         }else{
                             alert(response);
                         }

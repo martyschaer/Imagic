@@ -1,5 +1,5 @@
 <?php
-namespace Models\Factories;
+namespace Models\Builders;
 
 use \Drivers\MySQLDriver;
 use \Exception;
@@ -7,7 +7,7 @@ use \Utilities\SecurityHelper;
 use \Utilities\Validator;
 use \Models\User;
 
-class UserFactory extends User
+class UserBuilder extends User
 {
     private $user;
 

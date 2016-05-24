@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Models\User;
-use \Models\Factories\UserFactory;
+use \Models\Builders\UserBuilder;
 
 class UserController
 {
@@ -20,7 +20,7 @@ class UserController
             die();
         }
 
-        $factory = new UserFactory();
+        $factory = new UserBuilder();
         $user = $factory
             ->email($email)
             ->pass($pass)
