@@ -2,4 +2,87 @@
 html, body {
     font-family: 'Open Sans', sans-serif;
     color: #000000;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+header{
+    background-color: #585858;
+    height: 100px;
+    padding: 0 30px;
+    margin: 0;
+}
+
+header *{
+    display: inline-block;
+}
+
+header img#logo{
+    height: 100%;
+}
+
+header ul{
+    float: right;
+}
+
+li.user_email{
+    color: #DEDEDE;
+    margin: 5px;
+}
+
+a.light{
+    background-color: #DEDEDE;
+    color: #343434;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+a.dark{
+    background-color: #343434;
+    color: #DEDEDE;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+nav{
+    background-color: #585858;
+    height: 50px;
+    padding: 10px 50px;
+    margin: 0;
+}
+
+nav ul{
+    height: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li{
+    flex: 1;
+    display: table-cell;
+    color: #343434;
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    margin: 0 10px;
+    background-color: #DEDEDE;
+    border-radius: 5px;
+}
+
+nav ul li a{
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }

@@ -1,0 +1,33 @@
+/*Login / Registration*/
+form#login_form{
+    background-color: rgb(66, 167, 255);
+    box-shadow: 4px 4px 16px 0 rgb(139, 139, 139);
+    width: 200px;
+    margin: 50px auto;
+    padding: 10px;
+}
+
+form#login_form input[type="password"], input[type="email"]{
+    background-color: transparent;
+    border: none;
+    border-bottom: rgb(255, 255, 255) 1px solid;
+    outline: none;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    margin: 5px auto;
+}
+
+
+form#login_form input[type="submit"]{
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 2px;
+    margin: 5px;
+    box-shadow: 4px 4px 16px 0 rgb(139, 139, 139);
+    font-size: 16px;
+    padding: 3px
+}
+
+form#login_form h2{
+    font-weight: lighter;
+}

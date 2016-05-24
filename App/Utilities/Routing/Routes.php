@@ -28,10 +28,14 @@ class Routes
             }],
             ['GET', '/user/logout', function(){
                 UserController::logout();
-                header('Location: /');
             }],
-            ['GET', '/profile', function(){
-                Renderer::view('profile');
+            ['GET', '/user', function(){
+                $data = UserController::show(null);
+                Renderer::view('profile_private', $data);
+            }],
+            ['GET', '/user/[a:uri]', function($params){
+                $data = UserController::show($params['uri']);
+                Renderer::view('profile_public', $data);
             }]
         ];
     }

@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Models\User;
-use \Models\Factories\UserFactory;
+use \Models\Builders\UserBuilder;
 
 class UserController
 {
@@ -20,7 +20,7 @@ class UserController
             die();
         }
 
-        $factory = new UserFactory();
+        $factory = new UserBuilder();
         $user = $factory
             ->email($email)
             ->pass($pass)
@@ -56,10 +56,18 @@ class UserController
         die();
     }
 
-    public
+    public static function show($uri){
+        $uri = ($uri == null ? $_SESSION['user']->getUri() : $uri);
+        $user = new User();
+        print_r($user->getByUri($uri));
+        return ['uri' => $user->getUri()];
+    }
+
+
     static function logout()
     {
         $_SESSION = null;
         session_destroy();
+        header('Location: /');
     }
 }
