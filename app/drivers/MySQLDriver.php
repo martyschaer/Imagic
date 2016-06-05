@@ -46,6 +46,7 @@ class MySQLDriver
         try {
             $statement = self::$conn->prepare($query);
             foreach ($params as $col => $value) {
+                $value = htmlEntities($value, ENT_QUOTES); //encode fall html entities, to help with XSS
                 $statement->bindValue($col, $value);
             }
             $statement->execute();
