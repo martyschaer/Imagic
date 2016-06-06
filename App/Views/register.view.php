@@ -6,6 +6,7 @@
 <span>
     <form id="register_form">
         <input name="email" type="email" placeholder="email-address" required>
+        <input name="username" type="text" placeholder="username" required>
         <input name="pass" type="password" placeholder="password" pattern=".{11,}" oninvalid="this.setCustomValidity('The password must be at least 12 characters long.')">
         <input name="pass_repeat" type="password" placeholder="repeat password" pattern=".{11,}" oninvalid="this.setCustomValidity('The password must be at least 12 characters long.')">
         <input type="submit" value="register">
@@ -29,7 +30,7 @@
                     pass_input.setCustomValidity("");
                     pass_repeat_input.setCustomValidity("");
                     $.ajax({
-                        url : '/user/new',
+                        url : '/users',
                         data : form.serialize(),
                         method: 'POST',
                         success: function(response){

@@ -6,6 +6,7 @@ use \Utilities\Routing\Router;
 use \Utilities\Routing\Routes;
 use \Utilities\Constants;
 use \Views\Renderer;
+use \Utilities\SecurityHelper;
 
 //bootstrapping the autoloader
 $autoloader = new Autoloader();
@@ -30,6 +31,11 @@ $router->addRoutes(Routes::all());
 $match = $router->match();
 
 if ($match && is_callable($match['target'])) {
+    if(!SecurityHelper::isAuthentificated($match['auth'])){
+        error_log($_SERVER['REMOTE_ADDR'] . " tried to access " . $match['route'] . " without auth.");
+        header('Location:/login');
+        die();
+    }
     call_user_func($match['target'], $match['params']);
 } else {
     Renderer::view('404', ['uri' => $_SERVER['REQUEST_URI']]);

@@ -14,20 +14,27 @@ class User
     protected $reset_hash = null;
     protected $reset_time = null;
     protected $signup_time = 0;
-    protected $profile_image = "placeholder";
+    protected $profile_image;
     protected $permission_level = 0;
-    protected $uri = "placeholder";
+    protected $username = "placeholder";
 
     public function __construct()
     {
 
     }
 
+    public function delete($id = null){
+        $id = ($id == null ? $this->id : $id);
+        $query = 'DELETE FROM `users` WHERE id = :id';
+        $params = ['id' => $id];
+        MySQLDriver::query($query, $params);
+    }
+
     public function save()
     {
         $query = "UPDATE `users` SET
                   `email` = `:email`,
-                  `uri` = `:uri`,
+                  `username` = `:username`,
                   `pass` = `:pass`,
                   `reset_hash` = `:reset_hash`,
                   `reset_time` = `:reset_time`,
@@ -38,12 +45,12 @@ class User
         $params = [
             ':id' => $this->id,
             ':email' => $this->email,
-            ':uri' => $this->uri,
+            ':username' => $this->username,
             ':pass' => $this->pass,
             ':reset_hash' => $this->reset_hash,
             ':reset_time' => $this->reset_time,
             ':signup_time' => $this->signup_time,
-            ':profile_image' => $this->permission_level,
+            ':profile_image' => $this->profile_image,
             ':permission_level' => $this->permission_level
         ];
         MySQLDriver::query($query, $params);
@@ -60,7 +67,7 @@ class User
         $data = $result[0];
         $this->id = $data['id'];
         $this->email = $data['email'];
-        $this->uri = $data['uri'];
+        $this->username = $data['username'];
         $this->pass = $data['pass'];
         $this->reset_hash = $data['reset_hash'];
         $this->reset_time = $data['reset_time'];
@@ -82,7 +89,7 @@ class User
         if (SecurityHelper::verifyPass($pass, $db_hash)) {
             $this->id = $data['id'];
             $this->email = $data['email'];
-            $this->uri = $data['uri'];
+            $this->username = $data['username'];
             $this->pass = $data['pass'];
             $this->reset_hash = $data['reset_hash'];
             $this->reset_time = $data['reset_time'];
@@ -95,36 +102,16 @@ class User
         }
     }
 
-    public function getByUri($uri){
-        if(isset($_SESSION['user']) && $_SESSION['user']->getUri() == $uri){
-            return $this->getPrivateData($uri);
+    public function getByUsername($username){
+        if(isset($_SESSION['user']) && $_SESSION['user']->getUsername() == $username){
+            return $this->getPrivateData($username);
         }else{
-            return $this->getPublicData($uri);
+            return $this->getPublicData($username);
         }
     }
 
-    private function getPublicData($uri){
-        $query = "SELECT
-                    `uri`, `signup_time`, `profile_image`, `permission_level`
-                  FROM users WHERE `uri` = :uri";
-        $params = [':uri' => $uri];
-        $result = MySQLDriver::query($query, $params);
-        if (count($result) != 1) {
-            throw new Exception('Could not get this user. Wrong URI or URI does not exist.' . print_r($uri, true));
-        }
-        return $result[0];
-    }
-
-    private function getPrivateData($uri){
-        $query = "SELECT
-                    `uri`, `signup_time`, `profile_image`, `permission_level`
-                  FROM users WHERE `uri` = :uri";
-        $params = [':uri' => $uri];
-        $result = MySQLDriver::query($query, $params);
-        if (count($result) != 1) {
-            throw new Exception('Could not get this user. Wrong URI or URI does not exist.' . $uri . "@@    ");
-        }
-        return $result[0];
+    public function getId(){
+        return $this->id;
     }
 
     public function getEmail()
@@ -132,8 +119,24 @@ class User
         return $this->email;
     }
 
-    public function getUri(){
-        return $this->uri;
+    public function getUsername(){
+        return $this->username;
+    }
+
+    public function getSignupTime(){
+        return $this->signup_time;
+    }
+
+    public function getProfileImage(){
+        if($this->profile_image != null){
+            return $this->profile_image;
+        }else{
+            return 'anonymous';
+        }
+    }
+
+    public function getPermissionLevel(){
+        return $this->permission_level;
     }
 
     public function setEmail($email)

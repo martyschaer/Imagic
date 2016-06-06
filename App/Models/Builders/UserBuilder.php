@@ -77,20 +77,20 @@ class UserBuilder extends User
         return $this;
     }
 
-    public function uri($uri = null)
+    public function username($username)
     {
-        //TODO implement
-        $this->user->uri = $uri;
+        $this->user->username = $username;
+        return $this;
     }
 
     public function make()
     {
         $query = "INSERT INTO `users`
-                  (`email`, `uri`, `pass`, `reset_hash`, `reset_time`, `signup_time`, `profile_image`, `permission_level`)
-                  VALUES (:email, :uri, :pass, :reset_hash, :reset_time, :signup_time, :profile_image, :permission_level)";
+                  (`email`, `username`, `pass`, `reset_hash`, `reset_time`, `signup_time`, `profile_image`, `permission_level`)
+                  VALUES (:email, :username, :pass, :reset_hash, :reset_time, :signup_time, :profile_image, :permission_level)";
         $params = [
             ':email' => $this->user->email,
-            ':uri' => $this->user->uri,
+            ':username' => $this->user->username,
             ':pass' => $this->user->pass,
             ':reset_hash' => $this->user->reset_hash,
             ':reset_time' => $this->user->reset_time,

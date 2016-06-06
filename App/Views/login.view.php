@@ -17,12 +17,12 @@
             form.on('submit', function(e){
                 e.preventDefault();
                 $.ajax({
-                    url : '/user/login',
+                    url : '/users/login',
                     data : form.serialize(),
                     method: 'POST',
                     success: function(response){
                         if(response == 'ok'){
-                            window.location.href = '/user'
+                            window.location.href = '/users'
                         }else{
                             alert(response);
                         }

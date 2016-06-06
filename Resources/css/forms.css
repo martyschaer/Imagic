@@ -7,7 +7,7 @@ form#login_form{
     padding: 10px;
 }
 
-form#login_form input[type="password"], input[type="email"]{
+form#login_form input[type="password"], input[type="email"], input[type="text"]{
     background-color: transparent;
     border: none;
     border-bottom: rgb(255, 255, 255) 1px solid;
@@ -30,4 +30,62 @@ form#login_form input[type="submit"]{
 
 form#login_form h2{
     font-weight: lighter;
+}
+
+div.form{
+    border: 1px rgb(50, 50, 50) solid;
+    border-radius: 5px;
+    margin: 30px auto;
+}
+
+button.danger{
+    color: rgb(188, 63, 57);
+    border-radius: 3px;
+    border: 1px solid rgb(163, 163, 163);
+    background-color: rgb(222, 222, 222);
+    padding: 5px;
+    font-size: 14px;
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.danger:hover{
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(157, 54, 49);
+    background-color: rgb(188, 63, 57);
+}
+
+button.submit{
+    color: rgb(49, 121, 157);
+    border-radius: 3px;
+    border: 1px solid rgb(163, 163, 163);
+    background-color: rgb(222, 222, 222);
+    padding: 5px;
+    font-size: 14px;
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.submit:hover{
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(49, 121, 157);
+    background-color: rgb(57, 148, 187);
+}
+
+div.form div.danger{
+    background-color: rgb(49, 121, 157);
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+div.feedback{
+    margin: 5px auto;
+    color: rgb(188, 63, 57);
 }
