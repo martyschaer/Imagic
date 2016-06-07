@@ -10,12 +10,14 @@
             <table>
                 <tr>
                     <td><input id="file_container" type="file" placeholder="choose image"></td>
+                    <td><input id="tags" type="text" placeholder="tags(space separated)"></td>
+                    <td><input id="title" type="text" placeholder="title"></td>
                     <td>
                         <button id="submit_image" class="submit">upload</button>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                <td colspan="2">
                         <div id="feedback" class="feedback">
 
                         </div>
@@ -33,6 +35,8 @@
                 var user_feedback = $('div#feedback');
                 var data = new FormData();
                 data.append('file', file);
+                data.append('tags', $('input#tags').val());
+                data.append('title', $('input#title').val());
                 if(file == undefined){
                     user_feedback.html('no file chosen');
                     return;
@@ -46,7 +50,9 @@
                     data        : data,
                     type        : 'POST',
                     success     : function(response){
-                        alert(response);
+                        if(response === 'ok'){
+                            window.location.replace('/');
+                        }
                     }
                 })
             });

@@ -25,4 +25,6 @@ class Constants
     const PERMISSIONS = [0 => 'user', 1 => 'moderator', 9 => 'admin'];
 
     const PATH_BASE = '/web/www/imagic/App';
+
+
 }

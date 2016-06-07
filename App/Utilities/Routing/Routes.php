@@ -41,17 +41,21 @@ class Routes
                 $data = UserController::show();
                 Renderer::view('profile', $data);
             }, 2],
-            ['DELETE', '/users/[i:id]', function(){
-                //delete user with id
+            ['DELETE', '/users/[i:id]', function($params){
+                UserController::destroy($params['id']);
+            }, 2],
+            ['PATCH', '/users/[i:id]', function($params){
+                UserController::update($params['id']);
             }, 2],
             ['GET', '/upload', function(){
                 Renderer::view('upload');
             }, 2],
             ['GET', '/images', function(){
-                //get all the images, optional ?q= parameter for searching
+                $data = ['JSON' => ImageController::get()];
+                Renderer::view('show', $data);
             }, 2],
             ['GET', '/images/[i:id]', function($params){
-                //get the image with the corresponding id
+                ImageController::get($params['id']);
             }, 2],
             ['POST', '/images', function(){
                 ImageController::create();

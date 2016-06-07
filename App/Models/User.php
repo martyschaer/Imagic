@@ -11,8 +11,6 @@ class User
     protected $id;
     protected $email;
     protected $pass;
-    protected $reset_hash = null;
-    protected $reset_time = null;
     protected $signup_time = 0;
     protected $profile_image;
     protected $permission_level = 0;
@@ -30,25 +28,37 @@ class User
         MySQLDriver::query($query, $params);
     }
 
+    public function logout(){
+        $_SESSION = null;
+        session_destroy();
+        header('Location: /');
+    }
+
+    public function patch(){
+        $data = Validator::parameters(file_get_contents('php://input'));
+        foreach($data as $key => $value){
+            if($value != ""){
+                $this->{$key} = $value;
+            }
+        }
+        $this->save();
+    }
+
     public function save()
     {
         $query = "UPDATE `users` SET
-                  `email` = `:email`,
-                  `username` = `:username`,
-                  `pass` = `:pass`,
-                  `reset_hash` = `:reset_hash`,
-                  `reset_time` = `:reset_time`,
-                  `signup_time` = `:signup_time`,
-                  `profile_image` = `:profile_image`,
-                  `permission_level` = `:permission_level`
-                  WHERE `id` = `:id`";
+                  `email` = :email,
+                  `username` = :username,
+                  `pass` = :pass,
+                  `signup_time` = :signup_time,
+                  `profile_image` = :profile_image,
+                  `permission_level` = :permission_level
+                  WHERE `id` = :id";
         $params = [
             ':id' => $this->id,
             ':email' => $this->email,
             ':username' => $this->username,
             ':pass' => $this->pass,
-            ':reset_hash' => $this->reset_hash,
-            ':reset_time' => $this->reset_time,
             ':signup_time' => $this->signup_time,
             ':profile_image' => $this->profile_image,
             ':permission_level' => $this->permission_level
@@ -69,8 +79,6 @@ class User
         $this->email = $data['email'];
         $this->username = $data['username'];
         $this->pass = $data['pass'];
-        $this->reset_hash = $data['reset_hash'];
-        $this->reset_time = $data['reset_time'];
         $this->signup_time = $data['signup_time'];
         $this->profile_image = $data['profile_image'];
         $this->permission_level = $data['permission_level'];
@@ -91,8 +99,6 @@ class User
             $this->email = $data['email'];
             $this->username = $data['username'];
             $this->pass = $data['pass'];
-            $this->reset_hash = $data['reset_hash'];
-            $this->reset_time = $data['reset_time'];
             $this->signup_time = $data['signup_time'];
             $this->profile_image = $data['profile_image'];
             $this->permission_level = $data['permission_level'];
@@ -128,6 +134,7 @@ class User
     }
 
     public function getProfileImage(){
+        //TODO
         if($this->profile_image != null){
             return $this->profile_image;
         }else{
@@ -147,5 +154,10 @@ class User
         } else {
             return false;
         }
+    }
+
+    public function setProfileImage($id){
+        //TODO
+        $this->profile_image = $id;
     }
 }

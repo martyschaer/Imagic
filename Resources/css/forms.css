@@ -75,7 +75,7 @@ button.submit:hover{
 }
 
 div.form div.danger{
-    background-color: rgb(49, 121, 157);
+    background-color: rgb(223, 62, 62);
     border-radius: 5px 5px 0 0;
     width: 100%;
     color: rgb(255, 255, 255);

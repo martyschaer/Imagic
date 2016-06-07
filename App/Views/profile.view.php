@@ -10,14 +10,14 @@
     <br>
     <br>
     <div class="form">
-        <form>
+        <form id="details">
             <table>
                 <tr>
                     <td>
                         email
                     </td>
                     <td>
-                        <input type="email" placeholder="{{email}}">
+                        <input name="email" type="email" placeholder="{{email}}">
                     </td>
                 </tr>
                 <tr>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>username</td>
                     <td>
-                        <input type="text" placeholder="{{username}}">
+                        <input name="username" type="text" placeholder="{{username}}">
                     </td>
                 </tr>
                 <tr>
@@ -37,6 +37,11 @@
                 <tr>
                     <td><a href="/users/picture">change profile picture</a></td>
                 </tr>
+                <tr>
+                    <td>
+                        <button id="change_details" class="submit">change account details</button>
+                    </td>
+                </tr>
             </table>
         </form>
     </div>
@@ -44,20 +49,47 @@
         <div class="danger">
             danger zone
         </div>
-        <form>
-            <table width="90%">
-                <tr>
-                    <td>
-                        deleting your account will get rid of all your data
-                    </td>
-                    <td>
-                        <button class="danger" id="delete_account_button">delete account</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <table width="90%">
+            <tr>
+                <td>
+                    deleting your account will get rid of all your data
+                </td>
+                <td>
+                    <button class="danger" id="delete_account">delete account</button>
+                </td>
+            </tr>
+        </table>
+        <br>
         <script>
+            $(document).ready(function () {
+                $('button#change_details').on('click', function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        type    : 'PATCH',
+                        url     : '/users/{{id}}',
+                        data    : $('form#details').serialize(),
+                        success : function(r){
+                            window.location.reload();
+                        }
+                    });
+                });
 
+                //delete account
+                $('button#delete_account').on('click', function (e) {
+                    e.preventDefault();
+                    if (confirm("Do you really want to delete your account?")) {
+                        if (confirm("are you absolutely definitely sure?")) {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: '/users/{{id}}',
+                                success: function (r) {
+                                    window.location.replace('/');
+                                }
+                            });
+                        }
+                    }
+                });
+            })
         </script>
     </div>
 </div>

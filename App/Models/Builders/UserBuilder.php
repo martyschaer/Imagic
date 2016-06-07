@@ -62,12 +62,6 @@ class UserBuilder extends User
         return $this;
     }
 
-    public function profile_image()
-    {
-        //TODO implement
-        return $this;
-    }
-
     public function permission_level($level = 0)
     {
         if (!Validator::permission_level($level)) {
@@ -86,14 +80,12 @@ class UserBuilder extends User
     public function make()
     {
         $query = "INSERT INTO `users`
-                  (`email`, `username`, `pass`, `reset_hash`, `reset_time`, `signup_time`, `profile_image`, `permission_level`)
-                  VALUES (:email, :username, :pass, :reset_hash, :reset_time, :signup_time, :profile_image, :permission_level)";
+                  (`email`, `username`, `pass`, `signup_time`, `profile_image`, `permission_level`)
+                  VALUES (:email, :username, :pass, :signup_time, :profile_image, :permission_level)";
         $params = [
             ':email' => $this->user->email,
             ':username' => $this->user->username,
             ':pass' => $this->user->pass,
-            ':reset_hash' => $this->user->reset_hash,
-            ':reset_time' => $this->user->reset_time,
             ':signup_time' => $this->user->signup_time,
             ':profile_image' => $this->user->profile_image,
             ':permission_level' => $this->user->permission_level

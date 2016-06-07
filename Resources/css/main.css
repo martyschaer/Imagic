@@ -97,3 +97,7 @@ div.content{
 div.content table{
     margin: 0 auto;
 }
+
+img.showimage{
+    width: 90%;
+}

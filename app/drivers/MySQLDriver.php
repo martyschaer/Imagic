@@ -52,7 +52,7 @@ class MySQLDriver
             $statement->execute();
             $statement->setFetchMode(PDO::FETCH_ASSOC);
             $result = array();
-            if(!(Validator::insert_query($query) || Validator::update_query($query))){
+            if(!(Validator::insert_query($query) || Validator::update_query($query) || Validator::delete_query($query))){
                 while ($row = $statement->fetch()) {
                     $result[] = $row;
                 }
@@ -60,7 +60,8 @@ class MySQLDriver
             return $result;
         } catch (PDOException $e) {
             error_log("===PDO_ERROR=============");
-            error_log($e->getMessage());
+            $msg = $e->getMessage();
+            error_log($msg == null ? "no error" : $msg);
             error_log($query);
             error_log(print_r($params, true));
             error_log("===END_ERROR=============");

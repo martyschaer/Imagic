@@ -1,7 +1,6 @@
 <?php
 namespace Controllers;
 
-use Drivers\MySQLDriver;
 use \Models\User;
 use \Models\Builders\UserBuilder;
 use \Models\Permission;
@@ -37,7 +36,6 @@ class UserController
             echo "ok";
             die();
         }
-        echo print_r(get_defined_vars(), true);
         die();
     }
 
@@ -76,14 +74,23 @@ class UserController
     }
 
     public static function destroy($id){
+        //TODO admins deleting other users
+        $user = $_SESSION['user'];
+        $user->logout();
+        $user->delete();
+        echo 'ok';
+    }
 
+    public static function update($id){
+        //TODO admins updating other users
+        $user = $_SESSION['user'];
+        $user->patch();
     }
 
 
-    static function logout()
+    public static function logout()
     {
-        $_SESSION = null;
-        session_destroy();
-        header('Location: /');
+        $user = $_SESSION['user'];
+        $user->logout();
     }
 }
