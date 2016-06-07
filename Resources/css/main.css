@@ -86,3 +86,18 @@ nav ul li a{
     color: inherit;
     display: block;
 }
+
+div.content{
+    margin: 40px auto;
+    height: 90%;
+    width: 90%;
+    text-align: center;
+}
+
+div.content table{
+    margin: 0 auto;
+}
+
+img.showimage{
+    width: 90%;
+}

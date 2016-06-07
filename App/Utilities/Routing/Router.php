@@ -42,9 +42,9 @@ class Router
         $this->basePath = $basePath;
     }
 
-    public function map($method, $route, $target, $name = null)
+    public function map($method, $route, $target, $auth, $name = null)
     {
-        $this->routes[] = [$method, $route, $target, $name];
+        $this->routes[] = [$method, $route, $target, $auth, $name];
         if ($name) {
             if (in_array($name, $this->names)) {
                 throw new Exception("Route with name '{$name}' already exists");
@@ -54,7 +54,6 @@ class Router
         }
     }
 
-    //TODO understand and rewrite
     public function match($requestUrl = null, $requestMethod = null)
     {
         $params = array();
@@ -74,7 +73,7 @@ class Router
             $requestMethod = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
         }
         foreach ($this->routes as $handler) {
-            list($method, $_route, $target, $name) = $handler;
+            list($method, $_route, $target, $auth, $name) = $handler;
             $methods = explode('|', $method);
             $method_match = false;
             // Check if request method matches. If not, abandon early. (CHEAP)
@@ -128,14 +127,15 @@ class Router
                 return array(
                     'target' => $target,
                     'params' => $params,
-                    'name' => $name
+                    'name' => $name,
+                    'auth' => $auth,
+                    'route' => $_route
                 );
             }
         }
         return false;
     }
 
-    //TODO understand function
     private function compileRoute($route)
     {
         //TODO understand regex

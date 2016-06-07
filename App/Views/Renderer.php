@@ -5,6 +5,8 @@ use \Exception;
 
 class Renderer
 {
+    private static $view;
+
     /**
      * function that renders a .view.php
      * supports some basic templating with {{$param_name}}
@@ -15,6 +17,7 @@ class Renderer
      */
     public static function view($view, $params = [])
     {
+        self::$view = $view;
         $params = self::extendParams($params);
         $content = self::prep($view, $params);
         echo $content;
@@ -66,8 +69,6 @@ class Renderer
             $is_logged_in = true;
             $params['USER_EMAIL'] = $_SESSION['user']->getEmail();
         }
-
-        $params['REDIRECT_IF_NOT_LOGGED_IN'] = (!$is_logged_in ? "<script>window.location.replace('/login');</script>" : "<!--that did not work-->");
 
         $params['SESSION'] = print_r($_SESSION, true);
         $params['ROOT_PATH'] = "../../";

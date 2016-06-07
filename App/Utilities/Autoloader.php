@@ -149,7 +149,9 @@ class Autoloader
                 $fileName = str_replace($this->_namespaceSeparator, DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
             }
             $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . $this->_fileExtension;
-            require ($this->_includePath !== null ? $this->_includePath . DIRECTORY_SEPARATOR : '') . $fileName;
+            $finalpath = ($this->_includePath !== null ? $this->_includePath . DIRECTORY_SEPARATOR : '');
+            $finalpath = str_replace('\\', '/', $finalpath);
+            require $finalpath . $fileName;
         }
     }
 }

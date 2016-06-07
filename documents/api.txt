@@ -1,0 +1,29 @@
+# API Doc
+- `GET/`
+
+
+- `GET/users`
+- `GET/users/{username}`
+- `POST/users/{username}`
+- `PATCH/users/{username}`
+- `DELETE/users/{username}`
+
+
+- `GET/images`
+- `GET/images/{id}`
+- `POST/images`
+- `PATCH/images/{id}`
+- `DELETE/images/{id}`
+
+
+- `GET/galleries`
+- `GET/galleries/{id}`
+- `POST/galleries`
+- `PATCH/galleries/id`
+- `DELETE/galleries/id`
+
+
+- `GET/tags`
+- `GET/tags/{tagname}`
+- `POST/tags`
+- `DELETE/tags/{tagname}`

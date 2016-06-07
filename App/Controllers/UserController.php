@@ -3,16 +3,19 @@ namespace Controllers;
 
 use \Models\User;
 use \Models\Builders\UserBuilder;
+use \Models\Permission;
 
 class UserController
 {
+
     public static function create()
     {
-        if (!(isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['pass_repeat']))) {
+        if (!(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['pass']) && isset($_POST['pass_repeat']))) {
             echo "Not all required fields are filled out.";
             die();
         }
         $email = $_POST['email'];
+        $username = $_POST['username'];
         $pass = $_POST['pass'];
         $pass_repeat = $_POST['pass_repeat'];
         if ($pass !== $pass_repeat) {
@@ -26,13 +29,13 @@ class UserController
             ->pass($pass)
             ->permission_level(0)
             ->signup_time(time())
+            ->username($username)
             ->make();
 
         if ($user instanceof User) {
             echo "ok";
             die();
         }
-        echo print_r(get_defined_vars(), true);
         die();
     }
 
@@ -56,18 +59,38 @@ class UserController
         die();
     }
 
-    public static function show($uri){
-        $uri = ($uri == null ? $_SESSION['user']->getUri() : $uri);
-        $user = new User();
-        print_r($user->getByUri($uri));
-        return ['uri' => $user->getUri()];
+    public static function show(){
+        $user = $_SESSION['user'];
+        $signup = date('Y-m-d', $user->getSignupTime());
+        $permission = Permission::getPermissionLabel($user->getPermissionLevel());
+        return [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'signup' => $signup,
+            'username' => $user->getUsername(),
+            'profile_image' => $user->getProfileImage(),
+            'permission' => $permission
+        ];
+    }
+
+    public static function destroy($id){
+        //TODO admins deleting other users
+        $user = $_SESSION['user'];
+        $user->logout();
+        $user->delete();
+        echo 'ok';
+    }
+
+    public static function update($id){
+        //TODO admins updating other users
+        $user = $_SESSION['user'];
+        $user->patch();
     }
 
 
-    static function logout()
+    public static function logout()
     {
-        $_SESSION = null;
-        session_destroy();
-        header('Location: /');
+        $user = $_SESSION['user'];
+        $user->logout();
     }
 }
